@@ -4,7 +4,7 @@
 <body>
 <h1>EngineerLog</h1>
 {% if user.is_authenticated %}
-    <div>@{{ user.username }}から<a href="{% url 'engineerlog:logout' %}">ログアウト</a></div>
+    <div><a href="profile/{{ user.username }}">@{{ user.username }}</a>から<a href="{% url 'engineerlog:logout' %}">ログアウト</a></div>
 {% else %}
     <div><a href="{% url 'engineerlog:signup' %}">サインアップ</a>または<a href="{% url 'engineerlog:login' %}">ログイン</a></div>
 {% endif %}

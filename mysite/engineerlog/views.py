@@ -2,7 +2,7 @@ from django.views import generic
 from django.urls import path, reverse_lazy
 from django.contrib.auth import views, mixins
 from django.shortcuts import resolve_url
-from .models import Post, AppUser
+from .models import Post, AppUser, Profile
 from .forms import LoginForm, ProfileUpdateForm, SignUpForm
 
 class LoginView(views.LoginView):
@@ -31,7 +31,7 @@ class ProfileView(generic.DetailView):
 class ProfileUpdateView(mixins.UserPassesTestMixin, generic.UpdateView):
     raise_exception = False
 
-    model = AppUser
+    model = Profile
     form_class = ProfileUpdateForm
     template_name = 'engineerlog/profile_update.html'
 

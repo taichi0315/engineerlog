@@ -21,6 +21,17 @@ class Post(models.Model):
 
     def __str__(self):
         return self.comment
+
+class Profile(models.Model):
+        displayname = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=True)
+        icon = ProcessedImageField(
+            upload_to='icons/', 
+            processors=[Transpose(), ResizeToFill(50, 50)], 
+            format='JPEG',
+            options={'quality':60},
+            blank=True
+        )
+        profile_sentence = models.TextField(blank=True, null=True)
     
 class AppUserManager(BaseUserManager):
     use_in_migrations = True
@@ -48,7 +59,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     username=models.CharField(_('username'), max_length=20, unique=True, primary_key=True, db_index=True)
     email = models.EmailField(_('email address'))
-    displayname = models.CharField(_('displayname'), max_length=20)
     
     is_staff = models.BooleanField(
         _('staff status'),
@@ -65,19 +75,11 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
 
-    icon = ProcessedImageField(
-        upload_to='icons/', 
-        processors=[Transpose(), ResizeToFill(50, 50)], 
-        format='JPEG',
-        options={'quality':60},
-        blank=True
-    )
-    profile_sentence = models.TextField(blank=True, null=True)
-
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     objects = AppUserManager()
     
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = ['email']
+
 
