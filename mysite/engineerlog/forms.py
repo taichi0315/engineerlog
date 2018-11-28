@@ -1,7 +1,7 @@
 from django import forms
 from .models import AppUser, Profile
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class LoginForm(AuthenticationForm):
@@ -14,8 +14,13 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ('displayname', 'icon', 'profile_sentence')
 
+<<<<<<< HEAD
 class SignUpForm(UserCreationForm):
     
     class Meta:
         model = AppUser
         fields = ("username","email")
+=======
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+>>>>>>> parent of 42df552... signup
