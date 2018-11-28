@@ -6,7 +6,7 @@
 {% if user.is_authenticated %}
     <div>@{{ user.username }}から<a href="{% url 'engineerlog:logout' %}">ログアウト</a></div>
 {% else %}
-    <div><a href="{% url 'engineerlog:login' %}">ログイン</a></div>
+    <div><a href="{% url 'engineerlog:signup' %}">サインアップ</a>または<a href="{% url 'engineerlog:login' %}">ログイン</a></div>
 {% endif %}
 <hr>
 

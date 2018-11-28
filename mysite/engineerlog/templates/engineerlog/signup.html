@@ -1,0 +1,12 @@
+{% block content %}
+
+<form method="post">
+
+{% csrf_token %}
+<ul>
+    {{ form }}
+</ul>
+<input type="submit" value="サインアップ">
+</form>
+
+{% endblock %}
