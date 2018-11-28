@@ -5,5 +5,7 @@
 
 <hr>
 
-<a href="/engineerlog/profile/{{ object.username }}/update">編集</a></div>
-<div><a href="{% url 'engineerlog:index' %}">Home</a></div>
+{% if object.username == user.username %}
+    <a href="/engineerlog/profile/{{ object.username }}/update">プロフィールの編集</a></div>
+{% endif %}
+<div><a href="{% url 'engineerlog:index' %}">ホーム</a></div>

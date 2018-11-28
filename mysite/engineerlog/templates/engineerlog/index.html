@@ -3,20 +3,20 @@
 </head>
 <body>
 <h1>EngineerLog</h1>
+{% if user.is_authenticated %}
+    <div>@{{ user.username }}から<a href="{% url 'engineerlog:logout' %}">ログアウト</a></div>
+{% else %}
+    <div><a href="{% url 'engineerlog:login' %}">ログイン</a></div>
+{% endif %}
 <hr>
 
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.displayname }}. Thanks for logging in. <a href="{% url 'engineerlog:logout' %}">logout</a></p>
-{% else %}
-    <div>Welcome, new user. Please <a href="{% url 'engineerlog:login' %}">login.</a></div>
-{% endif %}
-
 {% for post in posted_list %}
-    <div>
-        <a href="profile/{{ post.created_user.username }}"><img src="{{ post.created_user.icon.url }}" />{{ post.created_user.displayname }}</a>@{{ post.created_user.username }}<br>
+    <ul>
+        <a href="profile/{{ post.created_user.username }}"><img src="{{ post.created_user.icon.url }}" />{{ post.created_user.displayname }}</a>@{{ post.created_user.username }}
+        <div>{{ post.duration }}</div>
         {{ post.comment }}
-    </div>
+    </ul>
 {% empty %}
-    <p>No posts are available.</p>
+    <p>投稿がありません</p>
 {% endfor %}
 </body>
