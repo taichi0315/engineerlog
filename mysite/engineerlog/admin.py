@@ -10,20 +10,19 @@ class AppUserChangeForm(UserChangeForm):
         model = AppUser
         fields = '__all__'
 
-
 class AppUserCreationForm(UserCreationForm):
     class Meta:
         model = AppUser
-        fields = ('username', 'email')
+        fields = ('username', 'email','displayname')
 
 class AppUserAdmin(UserAdmin):
     fieldsets = (
         (None,      {'fields': ('username','password')}),
         (_('email'),      {'fields': ('email',)}),
-        #(_('displayname'),      {'fields':('displayname',)}),
+        (_('displayname'),      {'fields':('displayname',)}),
         (_('Permissions'),{'fields':('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        #(_('icon'),      {'fields': ('icon',)}),
-        #(_('profile_sentence'),      {'fields': ('profile_sentence',)}),
+        (_('icon'),      {'fields': ('icon',)}),
+        (_('profile_sentence'),      {'fields': ('profile_sentence',)}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
@@ -35,7 +34,7 @@ class AppUserAdmin(UserAdmin):
 
     form = AppUserChangeForm
     add_form = AppUserCreationForm
-    list_display = ('username', 'email', 'is_staff')
+    list_display = ('username', 'email', 'displayname', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
     search_fields = ('username',)
     ordering = ('username',)

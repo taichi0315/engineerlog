@@ -1,14 +1,9 @@
 from django.views import generic
-from django.urls import path
+from django.urls import path, reverse_lazy
 from django.contrib.auth import views, mixins
 from django.shortcuts import resolve_url
-<<<<<<< HEAD
-from .models import Post, AppUser, Profile
-from .forms import LoginForm, ProfileUpdateForm, SignUpForm
-=======
 from .models import Post, AppUser
-from .forms import LoginForm, ProfileUpdateForm
->>>>>>> parent of 42df552... signup
+from .forms import LoginForm, ProfileUpdateForm, SignUpForm
 
 class LoginView(views.LoginView):
     form_class = LoginForm
@@ -16,6 +11,11 @@ class LoginView(views.LoginView):
 
 class LogoutView(views.LogoutView, mixins.LoginRequiredMixin):
     template_name = 'engineerlog/logout.html'
+
+class SignUpView(generic.CreateView):
+    form_class = SignUpForm
+    success_url = reverse_lazy('engineerlog:login')
+    template_name = 'engineerlog/signup.html'
 
 class IndexView(generic.ListView):
     template_name = 'engineerlog/index.html'
@@ -31,7 +31,7 @@ class ProfileView(generic.DetailView):
 class ProfileUpdateView(mixins.UserPassesTestMixin, generic.UpdateView):
     raise_exception = False
 
-    model = Profile
+    model = AppUser
     form_class = ProfileUpdateForm
     template_name = 'engineerlog/profile_update.html'
 
