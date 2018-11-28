@@ -6,7 +6,22 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
+import numpy as np
+import uuid
 
+class Post(models.Model):
+    created_user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    duration = models.DurationField()
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.comment
+    
 class AppUserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -30,9 +45,10 @@ class AppUserManager(BaseUserManager):
         return self._create_user(username, email, password, True, True, **extra_fields)
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
-    username=models.CharField(_('username'), max_length=20, unique=True)
-    displayname = models.CharField(_('displayname'), max_length=20)
+
+    username=models.CharField(_('username'), max_length=20, unique=True, primary_key=True, db_index=True)
     email = models.EmailField(_('email address'))
+    displayname = models.CharField(_('displayname'), max_length=20)
     
     is_staff = models.BooleanField(
         _('staff status'),
@@ -48,7 +64,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
             'Unselect this instead of deleting accounts.'
         ),
     )
-    
+
     icon = ProcessedImageField(
         upload_to='icons/', 
         processors=[Transpose(), ResizeToFill(50, 50)], 
@@ -56,24 +72,12 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         options={'quality':60},
         blank=True
     )
+    profile_sentence = models.TextField(blank=True, null=True)
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-
     objects = AppUserManager()
     
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = ['email']
 
-class Post(models.Model):
-    created_user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-
-    duration = models.DurationField()
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.comment

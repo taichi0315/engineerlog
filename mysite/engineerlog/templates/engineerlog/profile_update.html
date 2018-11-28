@@ -1,0 +1,15 @@
+{% block content %}
+
+<form method="post">
+
+{% csrf_token %}
+
+<div>{{ form.displayname }}</div>
+<img src="{{ user.icon.url }}" />
+<div>{{ form.icon }}</div>
+<div>{{ form.profile_sentence }}</div>
+
+<input type="submit" value="更新">
+</form>
+
+{% endblock %}

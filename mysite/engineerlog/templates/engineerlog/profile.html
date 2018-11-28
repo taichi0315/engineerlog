@@ -1,6 +1,9 @@
 {{ object.displayname }}<br>
 <img src="{{ object.icon.url }}" />
 @{{ object.username}}<br>
-<!--
-<div><a href="/engineerlog/user/{{ object.id }}/edit">編集</a></div>-->
+{{ object.profile_sentence }}<br>
+
+<hr>
+
+<a href="/engineerlog/profile/{{ object.username }}/update">編集</a></div>
 <div><a href="{% url 'engineerlog:index' %}">Home</a></div>

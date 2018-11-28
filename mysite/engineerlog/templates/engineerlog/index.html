@@ -6,15 +6,15 @@
 <hr>
 
 {% if user.is_authenticated %}
-    <p>Welcome, {{ user.displayname }}. Thanks for logging in.</p>
+    <p>Welcome, {{ user.displayname }}. Thanks for logging in. <a href="{% url 'engineerlog:logout' %}">logout</a></p>
 {% else %}
     <div>Welcome, new user. Please <a href="{% url 'engineerlog:login' %}">login.</a></div>
 {% endif %}
 
 {% for post in posted_list %}
     <div>
-        {{ post.created_user.displayname }}<br>
-        <a href="user/{{post.created_user.username}}"><img src="{{ post.created_user.icon.url }}" /></a> {{ post.comment }}
+        <a href="profile/{{ post.created_user.username }}"><img src="{{ post.created_user.icon.url }}" />{{ post.created_user.displayname }}</a>@{{ post.created_user.username }}<br>
+        {{ post.comment }}
     </div>
 {% empty %}
     <p>No posts are available.</p>

@@ -23,12 +23,13 @@ class AppUserAdmin(UserAdmin):
         (_('displayname'),      {'fields':('displayname',)}),
         (_('Permissions'),{'fields':('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         (_('icon'),      {'fields': ('icon',)}),
+        (_('profile_sentence'),      {'fields': ('profile_sentence',)}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'displayname', 'password1', 'password2'),
+            'fields': ('username', 'email', 'password1', 'password2'),
         }),
     )
 
