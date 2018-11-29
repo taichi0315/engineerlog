@@ -15,7 +15,7 @@
     <ul>
         <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }}
         <div>{{ post.duration }}</div>
-        {{ post.comment }}
+        {{ post.comment | linebreaksbr }}
     </ul>
 {% empty %}
     <p>投稿がありません</p>
