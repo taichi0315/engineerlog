@@ -2,18 +2,23 @@
 
 {% block content %}
 <p>
+    <div class="float-right">
+        <button class="btn btn-primary"><a href="{% url 'engineerlog:post_create' %}" style="color:#ffffff">投稿</a></button>
+    </div>
+</p>
+<div>
 {% if user.is_authenticated %}
-    <div><a href="profile/{{ user.username }}">@{{ user.username }}</a>から<a href="{% url 'engineerlog:logout' %}">ログアウト</a></div>
+    <div><a href="profile/{{ user.username }}">マイページ</a></div>
 {% else %}
     <div><a href="{% url 'engineerlog:signup' %}">サインアップ</a>または<a href="{% url 'engineerlog:login' %}">ログイン</a></div>
 {% endif %}
-</p>
-<p>
-<div><a href="{% url 'engineerlog:post_create' %}">投稿</a></div>
-</p>
+</div>
+<br>
+
 {% for post in posted_list %}
+
 <ul>
-    <div style="padding: 20px; margin-bottom: 30px; border: 0.5px dashed #333333; border-radius: 4px;">
+    <div class="border border-primary rounded p-4">
         <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }}<hr>
         <div><p>勉強時間：{{ post.duration }}</p>{{ post.comment | linebreaksbr }}</div>
     </div>

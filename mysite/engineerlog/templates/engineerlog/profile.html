@@ -2,16 +2,23 @@
 
 {% block content %}
 
-<ul>
-    <div>{{ object.displayname }}</div>
-    <div><img src="{{ object.icon.url }}"/></div>
-    <div>@{{ object.username}}</div>
-    <p>{{ object.profile_sentence | linebreaksbr }}</p>
-</ul>
+<div>
+    <p><div><img src="{{ object.icon.url }}" />{{ object.displayname }}<br>@{{ object.username }}</div></p>
+    <p><div class="border border-primary rounded p-4">{{ object.profile_sentence | linebreaksbr }}</div></p>
+</div>
 
+<div class="float-right">
 {% if object.username == user.username %}
-    <a href="/engineerlog/profile/{{ object.username }}/update">プロフィールの編集</a>
+　  <div>
+        <a href="{% url 'engineerlog:logout' %}">ログアウト</a>
+    </div>
+    <div>
+        <a href="/engineerlog/profile/{{ object.username }}/update">プロフィールの編集</a>
+    </div>
 {% endif %}
-<div><a href="{% url 'engineerlog:index' %}">ホーム</a></div>
+    <div>
+        <a href="{% url 'engineerlog:index' %}">ホーム</a>
+    </div>
+</div>
 
 {% endblock %}
