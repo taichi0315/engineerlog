@@ -1,9 +1,10 @@
 {% extends "engineerlog/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p}}
-<input type="submit" value="サインアップ">
+    {{ form|crispy}}
+<button class="btn btn-primary" type="submit">サインアップ</button>
 </form>
 {% endblock %} 
