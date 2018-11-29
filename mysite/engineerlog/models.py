@@ -46,7 +46,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     username=models.CharField(_('username'), max_length=20, unique=True, primary_key=True, db_index=True)
     email = models.EmailField(_('email address'))
-    displayname = models.CharField(_('displayname'), max_length=20)
+    displayname = models.CharField(_('表示名'), max_length=20)
     
     is_staff = models.BooleanField(
         _('staff status'),

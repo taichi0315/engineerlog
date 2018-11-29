@@ -6,7 +6,7 @@
     <div>{{ object.displayname }}</div>
     <div><img src="{{ object.icon.url }}"/></div>
     <div>@{{ object.username}}</div>
-    <p>{{ object.profile_sentence }}</p>
+    <p>{{ object.profile_sentence | linebreaksbr }}</p>
 </ul>
 
 {% if object.username == user.username %}

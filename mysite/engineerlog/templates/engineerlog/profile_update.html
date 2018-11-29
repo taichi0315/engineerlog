@@ -5,10 +5,7 @@
 <form method="post">
 
 {% csrf_token %}
-
-<div>{{ form.displayname }}</div>
-<div>{{ form.icon }}</div>
-<div>{{ form.profile_sentence }}</div>
+{{ form.as_p }}
 
 <input type="submit" value="更新">
 </form>

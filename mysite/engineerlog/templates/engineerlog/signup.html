@@ -1,9 +1,9 @@
+{% extends "engineerlog/base.html" %}
+
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    <ul>
-        {{ form }}
-    </ul>
+    {{ form.as_p}}
 <input type="submit" value="サインアップ">
 </form>
 {% endblock %} 

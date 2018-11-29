@@ -8,14 +8,14 @@
     <div><a href="{% url 'engineerlog:signup' %}">サインアップ</a>または<a href="{% url 'engineerlog:login' %}">ログイン</a></div>
 {% endif %}
 <hr>
-
 {% for post in posted_list %}
-    <ul>
-        <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }}
-        <div>{{ post.duration }}</div>
-        {{ post.comment | linebreaksbr }}
-    </ul>
-{% empty %}
+<ul>
+    <div style="padding: 20px; margin-bottom: 30px; border: 0.5px dashed #333333; border-radius: 4px;">
+        <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }}<hr>
+        <div><p>勉強時間：{{ post.duration }}</p>{{ post.comment | linebreaksbr }}</div>
+    </div>
+</ul>
+    {% empty %}
     <p>投稿がありません</p>
 {% endfor %}
 
