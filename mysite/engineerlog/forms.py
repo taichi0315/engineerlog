@@ -1,5 +1,5 @@
 from django import forms
-from .models import AppUser
+from .models import AppUser, Post
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
@@ -20,3 +20,9 @@ class SignUpForm(UserCreationForm):
         fields = ("username","email", "displayname")
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+class PostCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ("duration", "comment")

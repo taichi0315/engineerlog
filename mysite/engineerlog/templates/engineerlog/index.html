@@ -3,6 +3,7 @@
 </head>
 <body>
 <h1>EngineerLog</h1>
+<div><a href="{% url 'engineerlog:post_create' %}">投稿</a></div>
 {% if user.is_authenticated %}
     <div><a href="profile/{{ user.username }}">@{{ user.username }}</a>から<a href="{% url 'engineerlog:logout' %}">ログアウト</a></div>
 {% else %}
@@ -12,7 +13,7 @@
 
 {% for post in posted_list %}
     <ul>
-        <a href="profile/{{ post.created_user.username }}"><img src="{{ post.created_user.icon.url }}" />{{ post.created_user.displayname }}</a>@{{ post.created_user.username }}
+        <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }}
         <div>{{ post.duration }}</div>
         {{ post.comment }}
     </ul>

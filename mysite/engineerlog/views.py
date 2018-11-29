@@ -3,7 +3,7 @@ from django.urls import path, reverse_lazy
 from django.contrib.auth import views, mixins
 from django.shortcuts import resolve_url
 from .models import Post, AppUser
-from .forms import LoginForm, ProfileUpdateForm, SignUpForm
+from .forms import LoginForm, ProfileUpdateForm, SignUpForm, PostCreateForm
 
 class LoginView(views.LoginView):
     form_class = LoginForm
@@ -41,3 +41,12 @@ class ProfileUpdateView(mixins.UserPassesTestMixin, generic.UpdateView):
 
     def get_success_url(self):
         return resolve_url('engineerlog:profile', pk=self.kwargs['pk'])
+
+class PostCreateView(generic.CreateView):
+    form_class = PostCreateForm
+    success_url = reverse_lazy('engineerlog:index')
+    template_name = 'engineerlog/post_create.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)

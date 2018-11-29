@@ -6,11 +6,9 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
-import numpy as np
-import uuid
 
 class Post(models.Model):
-    created_user = models.ForeignKey(
+    created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
