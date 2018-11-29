@@ -1,5 +1,6 @@
 from django import forms
 from .models import AppUser, Post
+from django.forms.widgets import NumberInput
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
@@ -26,3 +27,6 @@ class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ("duration", "comment")
+        widgets = {
+            'duration': NumberInput(attrs={'type':'range', 'step':'5'})
+        }

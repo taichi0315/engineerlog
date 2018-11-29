@@ -1,10 +1,17 @@
-{{ object.displayname }}<br>
-@{{ object.username}}<br>
-{{ object.profile_sentence }}<br>
+{% extends "engineerlog/base.html" %}
 
-<hr>
+{% block content %}
+
+<ul>
+    <div>{{ object.displayname }}</div>
+    <div><img src="{{ object.icon.url }}"/></div>
+    <div>@{{ object.username}}</div>
+    <p>{{ object.profile_sentence }}</p>
+</ul>
 
 {% if object.username == user.username %}
-    <a href="/engineerlog/profile/{{ object.username }}/update">プロフィールの編集</a></div>
+    <a href="/engineerlog/profile/{{ object.username }}/update">プロフィールの編集</a>
 {% endif %}
 <div><a href="{% url 'engineerlog:index' %}">ホーム</a></div>
+
+{% endblock %}
