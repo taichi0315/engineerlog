@@ -13,9 +13,9 @@ class Post(models.Model):
         on_delete=models.CASCADE,
     )
 
-    duration = models.DurationField()
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    duration = models.DurationField(_('勉強時間'))
+    comment = models.TextField(_('コメント'))
+    created_at = models.DateTimeField(_('created at'), auto_now_add=True)
 
     def __str__(self):
         return self.comment
@@ -64,13 +64,15 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     )
 
     icon = ProcessedImageField(
+            verbose_name=_('アイコン'),
             upload_to='icons/', 
             processors=[Transpose(), ResizeToFill(50, 50)], 
             format='JPEG',
             options={'quality':60},
+            default='icons/default.JPG',
             blank=True
     )
-    profile_sentence = models.TextField(blank=True)
+    profile_sentence = models.TextField(_('プロフィール文'), blank=True)
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     objects = AppUserManager()

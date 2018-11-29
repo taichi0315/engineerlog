@@ -1,13 +1,16 @@
 {% extends "engineerlog/base.html" %}
 
 {% block content %}
-<div><a href="{% url 'engineerlog:post_create' %}">投稿</a></div>
+<p>
 {% if user.is_authenticated %}
     <div><a href="profile/{{ user.username }}">@{{ user.username }}</a>から<a href="{% url 'engineerlog:logout' %}">ログアウト</a></div>
 {% else %}
     <div><a href="{% url 'engineerlog:signup' %}">サインアップ</a>または<a href="{% url 'engineerlog:login' %}">ログイン</a></div>
 {% endif %}
-<hr>
+</p>
+<p>
+<div><a href="{% url 'engineerlog:post_create' %}">投稿</a></div>
+</p>
 {% for post in posted_list %}
 <ul>
     <div style="padding: 20px; margin-bottom: 30px; border: 0.5px dashed #333333; border-radius: 4px;">

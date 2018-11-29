@@ -1,5 +1,6 @@
 from django.views import generic
 from django.urls import path, reverse_lazy
+from django.http import HttpResponseRedirect
 from django.contrib.auth import views, mixins
 from django.shortcuts import resolve_url
 from .models import Post, AppUser
@@ -14,8 +15,8 @@ class LogoutView(views.LogoutView, mixins.LoginRequiredMixin):
 
 class SignUpView(generic.CreateView):
     form_class = SignUpForm
-    success_url = reverse_lazy('engineerlog:login')
     template_name = 'engineerlog/signup.html'
+    success_url = reverse_lazy('engineerlog:login')
 
 class IndexView(generic.ListView):
     template_name = 'engineerlog/index.html'
@@ -38,6 +39,11 @@ class ProfileUpdateView(mixins.UserPassesTestMixin, generic.UpdateView):
     def test_func(self):
         user = self.request.user
         return user.pk == self.kwargs['pk'] or user.is_superuser
+
+    def form_valid(self, form):
+        form.instance.icon = self.object.icon
+        form.save()
+        return super().form_valid(form)
 
     def get_success_url(self):
         return resolve_url('engineerlog:profile', pk=self.kwargs['pk'])
