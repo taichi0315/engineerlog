@@ -1,4 +1,6 @@
 {% extends "engineerlog/base.html" %}
+{% load staticfiles%}
+{% load humanize %}
 
 {% block content %}
 <p>
@@ -19,12 +21,17 @@
 
 <ul>
     <div class="border border-primary rounded p-4">
-        <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }}<hr>
-        <div><p>勉強時間：{{ post.duration }}</p>{{ post.comment | linebreaksbr }}</div>
+        <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }} {{ post.created_at|naturaltime }}<hr>
+        <div id="app">{{ post.duration|naturaltime }}</div>
+        <div>{{ post.comment | linebreaksbr }}</div>
     </div>
 </ul>
     {% empty %}
     <p>投稿がありません</p>
 {% endfor %}
 
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'engineerlog/js/index.js' %}"></script>
 {% endblock %}

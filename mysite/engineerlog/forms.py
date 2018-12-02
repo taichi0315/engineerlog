@@ -24,4 +24,16 @@ class PostCreateForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ("duration", "comment")
+        fields = ("duration","comment")
+
+        widgets = {
+            "duration": forms.NumberInput(
+                attrs={
+                    "type":"range",
+                    "step":"10",
+                    "min":"10",
+                    "max":"600",
+                    "v-model":"duration",
+                }
+            )
+        }
