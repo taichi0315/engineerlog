@@ -19,9 +19,9 @@
 {% for post in posted_list %}
 
 <ul>
-    <div class="border border-primary rounded p-4">
-        <p><a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }} {{ post.created_at|naturaltime }}</p><hr>
-        <p id="app">勉強時間：{{ post.comb_duration }}</p>
+    <div class="border border-muted rounded p-4">
+        <p><a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" /> {{ post.created_by.displayname }}</a>@{{ post.created_by.username }} {{ post.created_at|naturaltime }}</p><hr>
+        <p id="app" class="text-success">勉強時間：{{ post.comb_duration }}</p>
         <p>{{ post.comment | linebreaksbr }}</p>
     </div>
 </ul>
