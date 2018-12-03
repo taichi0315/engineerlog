@@ -16,14 +16,13 @@
 {% endif %}
 </div>
 <br>
-
 {% for post in posted_list %}
 
 <ul>
     <div class="border border-primary rounded p-4">
-        <a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }} {{ post.created_at|naturaltime }}<hr>
-        <div id="app">{{ post.duration|naturaltime }}</div>
-        <div>{{ post.comment | linebreaksbr }}</div>
+        <p><a href="profile/{{ post.created_by.username }}"><img src="{{ post.created_by.icon.url }}" />{{ post.created_by.displayname }}</a>@{{ post.created_by.username }} {{ post.created_at|naturaltime }}</p><hr>
+        <p id="app">勉強時間：{{ post.comb_duration }}</p>
+        <p>{{ post.comment | linebreaksbr }}</p>
     </div>
 </ul>
     {% empty %}

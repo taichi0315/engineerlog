@@ -30,9 +30,9 @@ class PostCreateForm(forms.ModelForm):
             "duration": forms.NumberInput(
                 attrs={
                     "type":"range",
-                    "step":"10",
-                    "min":"10",
-                    "max":"600",
+                    "step":"600",
+                    "min":"600",
+                    "max":"36000",
                     "v-model":"duration",
                 }
             )

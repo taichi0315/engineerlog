@@ -22,6 +22,20 @@ class IndexView(generic.ListView):
     template_name = 'engineerlog/index.html'
     context_object_name = 'posted_list'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        for i in range(len(context["object_list"])):
+            duration_list = str(context["object_list"][i].duration).split(':')
+            if duration_list[0] == "0":
+                context["object_list"][i].comb_duration = f"{duration_list[1]}分"
+            else:
+                context["object_list"][i].comb_duration = f"{duration_list[0]}時間{duration_list[1]}分"
+    
+            print(context["object_list"][i].comb_duration)
+        
+        return context
+
     def get_queryset(self):
         return Post.objects.order_by('-created_at')
 
