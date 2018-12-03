@@ -31,8 +31,6 @@ class IndexView(generic.ListView):
                 context["object_list"][i].comb_duration = f"{duration_list[1]}分"
             else:
                 context["object_list"][i].comb_duration = f"{duration_list[0]}時間{duration_list[1]}分"
-    
-            print(context["object_list"][i].comb_duration)
         
         return context
 
